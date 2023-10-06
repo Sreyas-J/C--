@@ -59,13 +59,16 @@ void execute_c_minus_minus(char *code) {
                 tok = strtok_r(NULL, "= ", &saveptr2);
                 char *v;
                 v=strtok_r(tok, ";", &saveptr3);
-                tok=strtok_r(NULL," + ",&saveptr2);
-                printf("tok: %s\n",tok);
+                tok=strtok_r(NULL," ",&saveptr2);
+                char *op=tok;
+                //printf("op: %s\n",op);
 
                 if (tok != NULL) {
+                    tok=strtok_r(NULL,tok,&saveptr2);
+                    //printf("tok: %s\n",tok);
                     char *y=strtok_r(tok,";",&saveptr3);
                     char result_str[stringLen];  
-                    sprintf(result_str, "%d", perform_arithematic(get_variable_value(v),"+",get_variable_value(y)));
+                    sprintf(result_str, "%d", perform_arithematic(get_variable_value(v),op,get_variable_value(y)));
                     assign_variable(result_str);
                 } else {
                     assign_variable(v);
